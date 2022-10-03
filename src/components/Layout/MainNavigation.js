@@ -12,7 +12,7 @@ const MainNavigation = () => {
   const isLoggedIn = authCtx.isLoggedIn;
 
   const logoutHandler = () => {
-    console.log("did");
+    console.log("I did");
     authCtx.logout();
     history.push("/");
   };
