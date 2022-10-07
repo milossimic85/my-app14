@@ -1,10 +1,14 @@
 import AuthForm from "../components/Auth/AuthForm";
 
-const AuthPage = () => {
+const AuthPage = (props) => {
   const addHandler = (userData) => {
-    console.log(userData);
+    props.onAdd(userData);
   };
-  return <AuthForm onAddData={addHandler} />;
+  const datasHandler = (data) => {
+    props.onAddDataSuccess(data);
+  };
+
+  return <AuthForm onAddSuccess={datasHandler} onAddData={addHandler} />;
 };
 
 export default AuthPage;
