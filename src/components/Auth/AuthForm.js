@@ -12,6 +12,7 @@ const AuthForm = (props) => {
   const inputPasswordRef = useRef();
   const authCtx = useContext(AuthContext);
   const [passwordIsValid, setPasswordIsValid] = useState(false);
+  const [errored, setErrored] = useState(false);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -62,9 +63,10 @@ const AuthForm = (props) => {
           new Date().getTime() + +data.expiresIn * 1000
         );
         authCtx.login(data.idToken, expiritionTime.toISOString());
+        props.onAddSuccess("Authentication success!");
       })
       .catch((error) => {
-        alert(error.message);
+        props.onAddData(`${error.message}. Try again!`);
       });
 
     inputEmailRef.current.value = "";
@@ -77,7 +79,7 @@ const AuthForm = (props) => {
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
           <label htmlFor="email">Your Email</label>
-          <input type="email" ref={inputEmailRef} id="email" />
+          <input type="email" ref={inputEmailRef} id="email" required />
         </div>
         <div className={classes.control}>
           <label htmlFor="password">Your Password</label>
@@ -99,7 +101,6 @@ const AuthForm = (props) => {
             type="button"
             className={classes.toggle}
             onClick={switchAuthModeHandler}
-            disabled={passwordIsValid}
           >
             {isLogin ? "Create new account" : "Login with existing account"}
           </button>

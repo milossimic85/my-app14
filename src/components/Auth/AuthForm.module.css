@@ -24,6 +24,10 @@
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
+.control.invalid input {
+  border-color: red;
+  background: #ffd7d7;
+}
 
 .control input {
   font: inherit;
