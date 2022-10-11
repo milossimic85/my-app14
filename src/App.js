@@ -12,6 +12,7 @@ import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import Location from "./components/Location/Location";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CurrentLocation from "./components/current-location/CurrentLocation";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -25,13 +26,11 @@ function App() {
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=7e0fdbf14c28aac7448823feef24d155&units=metric`
     );
 
-    Promise.all([currentWeatherFetch])
-      .then(async (response) => {
-        const weatherResponse = await response[0].json();
+    Promise.all([currentWeatherFetch]).then(async (response) => {
+      const weatherResponse = await response[0].json();
 
-        setCurrentWeather({ city: searchData.label, ...weatherResponse });
-      })
-      .catch(console.log);
+      setCurrentWeather({ city: searchData.label, ...weatherResponse });
+    });
   };
   const addSucessHandler = (data) => {
     if (data) {
@@ -65,9 +64,10 @@ function App() {
         />
       )}
       <Location />
+      //
+      <CurrentLocation />
       <Search onSearchChange={onSearchChangeHandler} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
-
       <Switch>
         <Route path="/" exact>
           <HomePage />
