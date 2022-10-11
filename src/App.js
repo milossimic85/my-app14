@@ -12,7 +12,6 @@ import CurrentWeather from "./components/CurrentWeather/CurrentWeather";
 import Location from "./components/Location/Location";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CurrentLocation from "./components/current-location/CurrentLocation";
 import { OPEN_WEATHER_API, weatherKey } from "./components/api";
 
 function App() {
@@ -65,8 +64,6 @@ function App() {
         />
       )}
       <Location />
-      //
-      <CurrentLocation />
       <Search onSearchChange={onSearchChangeHandler} />
       {currentWeather && <CurrentWeather data={currentWeather} />}
       <Switch>
