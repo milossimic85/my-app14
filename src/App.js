@@ -13,6 +13,7 @@ import Location from "./components/Location/Location";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CurrentLocation from "./components/current-location/CurrentLocation";
+import { OPEN_WEATHER_API, weatherKey } from "./components/api";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -23,7 +24,7 @@ function App() {
   const onSearchChangeHandler = (searchData) => {
     const [lat, lon] = searchData.value.split("");
     const currentWeatherFetch = fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=7e0fdbf14c28aac7448823feef24d155&units=metric`
+      `${OPEN_WEATHER_API}?lat=${lat}&lon=${lon}&appid=${weatherKey}&units=metric`
     );
 
     Promise.all([currentWeatherFetch]).then(async (response) => {

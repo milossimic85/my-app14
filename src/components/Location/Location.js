@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import classes from "./Location.module.css";
 import { ToastContainer, toast } from "react-toastify";
+import { GEO_CODE_API, geoKey } from "../api";
 
 const Location = () => {
   const [show, setShow] = useState(false);
   const [location, setLocation] = useState(null);
 
   const whereIAm = (lat, lon) => {
-    fetch(
-      `https://geocode.xyz/${lat},${lon}?geoit=json&auth=218965128455581846514x55491`
-    )
+    fetch(`${GEO_CODE_API}/${lat},${lon}?geoit=json&auth=${geoKey}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
 
